@@ -24,8 +24,8 @@ class BadSqlalchemyFilter(base.BaseLinter):
     """
 
     _code = "DUO138"
-    _error_tmpl = f"{_code} applying filter() after limit() or offset() without a from_self() in between will raise a runtime error."
-    _long_error_tmpl = f"{_code} Query.filter() being called on a Query which already has LIMIT or OFFSET applied. This will raise a runtime error. To modify the row-limited results of a  Query, call from_self() first.  Otherwise, call filter() before limit() or offset() are applied."
+    _error_tmpl = "DUO138 applying filter() after limit() or offset() without a from_self() in between will raise a runtime error."
+    _long_error_tmpl = "DUO138 Query.filter() being called on a Query which already has LIMIT or OFFSET applied. This will raise a runtime error. To modify the row-limited results of a  Query, call from_self() first.  Otherwise, call filter() before limit() or offset() are applied."
 
 
     sqlalchemy_filter_methods = {"filter", "filter_by"}
