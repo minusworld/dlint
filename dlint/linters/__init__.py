@@ -30,6 +30,7 @@ from .bad_requests_use import BadRequestsUseLinter
 from .bad_shelve_use import BadShelveUseLinter
 from .bad_subprocess_use import BadSubprocessUseLinter
 from .bad_ssl_module_attribute_use import BadSSLModuleAttributeUseLinter
+from .bad_sqlalchemy_filter import BadSqlalchemyFilter
 from .bad_sys_use import BadSysUseLinter
 from .bad_tarfile_use import BadTarfileUseLinter
 from .bad_tempfile_use import BadTempfileUseLinter
@@ -69,6 +70,7 @@ ALL = (
     BadRequestsUseLinter,
     BadShelveUseLinter,
     BadSSLModuleAttributeUseLinter,
+    BadSqlalchemyFilter,
     BadSysUseLinter,
     BadSubprocessUseLinter,
     BadTempfileUseLinter,

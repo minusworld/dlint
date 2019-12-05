@@ -194,6 +194,8 @@ def module_path(node):
         return module_path(node.value) + [node.attr]
     elif isinstance(node, ast.Name):
         return [node.id]
+    elif isinstance(node, ast.Call):
+        return module_path(node.func)
     else:
         return []
 
