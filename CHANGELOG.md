@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `DUO138`: lint for applying SQLAlchemy filter() after limit() or offset() without from_self(), which will raise a runtime error.
 
 ## [0.9.2] - 2019-11-21
 ### Fixed
