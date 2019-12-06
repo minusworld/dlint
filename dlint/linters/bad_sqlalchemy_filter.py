@@ -91,3 +91,4 @@ class BadSqlalchemyFilter(base.BaseLinter):
                     col_offset=node.col_offset,
                     message=self._error_tmpl
                 )
+            )
