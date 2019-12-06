@@ -40,6 +40,7 @@ Dlint uses a simple, folder-based hierarchy written in [Markdown](https://en.wik
 * [`DUO134` `BadCryptographyModuleAttributeUseLinter` insecure "cryptography" attribute use](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO134.md)
 * [`DUO135` `BadDefusedxmlUseLinter` enable all "forbid_*" defenses when using "defusedxml" parsing](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO135.md)
 * [`DUO136` `BadXmlsecModuleAttributeUseLinter` insecure "xmlsec" attribute use](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO136.md)
+* [`DUO137` `BadItsDangerousKwargUseLinter` insecure "itsdangerous" use allowing empty signing](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO137.md)
 * [`DUO138` `BadSqlalchemyFilter` applying SQLAlchemy filter() after limit() or offset() without from_self() will raise a runtime error.](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO138.md)
 
 # FAQs
@@ -92,6 +93,7 @@ comprehensive analysis and ensure you're coding with confidence.
 * [Scaling Static Analyses at Facebook (2019)](https://cacm.acm.org/magazines/2019/8/238344-scaling-static-analyses-at-facebook/fulltext)
 * [Static Analysis at Scale: An Instagram Story (2019)](https://instagram-engineering.com/static-analysis-at-scale-an-instagram-story-8f498ab71a0c)
 * [A Few Billion Lines of Code Later: Using Static Analysis to Find Bugs in the Real World (2010)](https://cacm.acm.org/magazines/2010/2/69354-a-few-billion-lines-of-code-later/fulltext)
+* [How to Build Static Checking Systems Using Orders of Magnitude Less Code (2016)](https://web.stanford.edu/~mlfbrown/paper.pdf)
 
 ## How can I integrate Dlint into XYZ?
 

@@ -133,3 +133,13 @@ def delete():
         for ending in ("update()", "delete()"):
             code = code_template.format(method, ending)
             assert len(run_linter(code)) == 0
+
+def test_filter_by():
+    code = """
+@app.route("/get_users")
+def get_users():
+    id = request.args.get("id")
+    users = User.query.filter_by(id=id).first()
+    return users.last_name
+"""
+    assert len(run_linter(code)) == 0
