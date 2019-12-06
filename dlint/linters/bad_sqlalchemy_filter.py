@@ -57,7 +57,7 @@ class BadSqlalchemyFilter(base.BaseLinter):
         if node.attr in self.sqlalchemy_filter_methods:
             attr_sequence = tree.module_path(node)
             filter_index = _index(attr_sequence, node.attr)
-            limit_index = min([_index(attr_sequence, m) for m in self.sqlalchemy_limit_methods])
+            limit_index = max([_index(attr_sequence, m) for m in self.sqlalchemy_limit_methods])
             if limit_index >= 0 and limit_index < filter_index:
                 from_self_index = _index(attr_sequence, self.sqlalchemy_from_self)
                 if not (limit_index < from_self_index and from_self_index < filter_index):
