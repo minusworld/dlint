@@ -41,6 +41,7 @@ Dlint uses a simple, folder-based hierarchy written in [Markdown](https://en.wik
 * [`DUO135` `BadDefusedxmlUseLinter` enable all "forbid_*" defenses when using "defusedxml" parsing](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO135.md)
 * [`DUO136` `BadXmlsecModuleAttributeUseLinter` insecure "xmlsec" attribute use](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO136.md)
 * [`DUO137` `BadItsDangerousKwargUseLinter` insecure "itsdangerous" use allowing empty signing](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO137.md)
+* [`DUO138` `BadSqlalchemyFilter` applying SQLAlchemy filter() after limit() or offset() without from_self() will raise a runtime error.](https://github.com/duo-labs/dlint/blob/master/docs/linters/DUO138.md)
 
 # FAQs
 

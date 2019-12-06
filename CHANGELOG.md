@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `DUO137`: lint for insecure itsdangerous kwarg usage ([#36](https://github.com/duo-labs/dlint/issues/36))
+- `DUO138`: lint for applying SQLAlchemy filter() after limit() or offset() without from_self(), which will raise a runtime error.
 
 ## [0.9.2] - 2019-11-21
 ### Fixed
