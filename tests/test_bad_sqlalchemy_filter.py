@@ -97,3 +97,39 @@ def get_users():
     return users.last_name
 """
     assert len(run_linter(code)) == 0
+
+
+def test_bad_update_delete_combos():
+    code_template = """
+@app.route("/delete")
+def delete():
+    id = request.args.get("id")
+    User.query.{}.{}
+"""
+    methods = (
+        "limit(10)",
+        "offset(10)",
+        "distinct()",
+        "order_by(User.name)",
+        "group_by(User.name)",
+        "join(Orders)",
+        "outerjoin(Orders)",
+        "select_from(otherquery)",
+        "from_self()"
+    )
+    for method in methods:
+        for ending in ("update()", "delete()"):
+            code = code_template.format(method, ending)
+            assert len(run_linter(code)) == 1
+
+def test_ok_update_delete():
+    code_template = """
+@app.route("/delete")
+def delete():
+    id = request.args.get("id")
+    User.query.{}.{}
+"""
+    for method in ("filter_by(id=1)",):
+        for ending in ("update()", "delete()"):
+            code = code_template.format(method, ending)
+            assert len(run_linter(code)) == 0

@@ -14,7 +14,10 @@ from .. import tree
 
 
 def _index(sequence, item):
-    return sequence.index(item) if item in sequence else -1
+    try:
+        return sequence.index(item)
+    except ValueError:
+        return -1
 
 
 class BadSqlalchemyFilter(base.BaseLinter):
@@ -32,8 +35,23 @@ class BadSqlalchemyFilter(base.BaseLinter):
     sqlalchemy_limit_methods = {"limit", "offset"}
     sqlalchemy_from_self = "from_self"
 
+    sqlalchemy_bad_update_delete_left_side = {            
+        "limit",
+        "offset",
+        "order_by",
+        "group_by",
+        "distinct",
+        "join",
+        "outerjoin",
+        "select_from",
+        "from_self"
+    }
+    sqlalchemy_update_delete = {
+        "update",
+        "delete"
+    }
 
-    def visit_Attribute(self, node):
+    def _filter_after_limit(self, node):
         if node.attr in self.sqlalchemy_filter_methods:
             attr_sequence = tree.module_path(node)
             filter_index = _index(attr_sequence, node.attr)
@@ -41,10 +59,34 @@ class BadSqlalchemyFilter(base.BaseLinter):
             if limit_index < filter_index:
                 from_self_index = _index(attr_sequence, self.sqlalchemy_from_self)
                 if not (limit_index < from_self_index and from_self_index < filter_index):
-                    self.results.append(
-                        base.Flake8Result(
-                            lineno=node.lineno,
-                            col_offset=node.col_offset,
-                            message=self._error_tmpl
-                        )
-                    )
+                    return True
+        return False
+
+
+    def _bad_update_or_delete(self, node):
+        if node.attr in self.sqlalchemy_update_delete:
+            attr_sequence = tree.module_path(node)
+            greatest_bad_left_index = max([_index(attr_sequence, m) for m in self.sqlalchemy_bad_update_delete_left_side])
+            if greatest_bad_left_index < 0:
+                return False
+            update_delete_index = _index(attr_sequence, node.attr)
+            if greatest_bad_left_index < update_delete_index: # If update/delete comes after the others
+                return True
+        return False
+
+
+    def visit_Attribute(self, node):
+        hit = False
+        if self._filter_after_limit(node):
+            hit = True 
+        elif self._bad_update_or_delete(node):
+            hit = True
+
+        if hit:
+            self.results.append(
+                base.Flake8Result(
+                    lineno=node.lineno,
+                    col_offset=node.col_offset,
+                    message=self._error_tmpl
+                )
+            )
